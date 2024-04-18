@@ -17,8 +17,7 @@ from train import saveSummaryTorchInfo
 from torch_geometric.nn import GNNExplainer
 from torch_geometric.loader import DataLoader
 from sklearn.model_selection import train_test_split
-sys.path.append("/home/scontino/python/graph_vae/")
-from graphArchitecture import SingleClassGCNModel, SingleClassGCNModel_shapLike_2
+from graphArchitecture import SingleClassGCNModel_shapLike_2
 from Package.Train_metrics.Metrics import MetricsClass
 from Package.DataProcessing.DataProcessing import ManagePickle, DataProcessing
 
@@ -29,7 +28,7 @@ warnings.filterwarnings("ignore")
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
+csv_path
 
 protein_name = "CDK1"
 
@@ -39,11 +38,6 @@ protein_list = ["ACK", "ALK", "CDK1", "CDK2", "CDK6", "INSR","ITK","JKA2","JNK3"
 protein_index = protein_list.index(protein_name)
 
 setproctitle.setproctitle(f'single graphember ({protein_name})')
-
-
-csv_path = "/home/psortino/classificatore/SMiles&LabelFull.csv"
-
-base_dir = "/home/psortino/classificatore/"
 
 
 
@@ -58,9 +52,9 @@ for i in tqdm(range(len(graphs))):
 
 
 #/ path salvataggio 
-n_prova = 111
-path_models = f"/home/scontino/python/graph_vae/Addestramento_SDF_07_23/Esperimenti/{protein_name}/models/prova_{n_prova}/"
-path_results = f"/home/scontino/python/graph_vae/Addestramento_SDF_07_23/Esperimenti/{protein_name}/results/prova_{n_prova}/"
+n_prova = 1
+path_models = f"/models/prova_{n_prova}/"
+path_results = f"/results/prova_{n_prova}/"
 
 
 os.makedirs(path_models, exist_ok=True)

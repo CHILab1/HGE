@@ -366,38 +366,38 @@ class MolecularGraphExplainableGradient():
                 fig.savefig(file_name, bbox_inches="tight")
                 print("Immagine salvata con successo. ")
 
+if __name__ == "__main__":
+    path_sdf = "sdf_files/"
+    sdflist = glob.glob(f'{path_sdf}/*.sdf')
+    for sdf_file in tqdm(sdflist):
+        gen_graph = molGraphGenerator(path_sdf=sdf_file)
+        d, mol = gen_graph.graph_from_sdf()
+            
+        device = torch.device("cuda:0")
+        net2 = SingleClassGCNModel_shapLike_2(feature_node_dim=12, num_classes=1)
+        net2 = net2.to(device)
 
-path_sdf = "/home/scontino/python/graph_vae/Addestramento_SDF_07_23/sdf_files/"
-sdflist = glob.glob(f'{path_sdf}/*.sdf')
-for sdf_file in tqdm(sdflist):
-    gen_graph = molGraphGenerator(path_sdf=sdf_file)
-    d, mol = gen_graph.graph_from_sdf()
+        dictio_torch = torch.load("/models/LossModel_17.tar")
+
+        net2.load_state_dict(dictio_torch["model_state_dict"])
+        d = d.to(device)
+        net2.eval()
+        pred, logits = net2(d.x[:, :12], d.edge_index, None, hook_start=True, hook_mid=True, hook_end=True)
+        print(pred)
+
+        pred.backward()
+        grad = net2.get_activations_gradient()
+
+        d.x = d.x[:, :12]
+        n_atoms = d.x.shape[0]
+        print(n_atoms)
+
+        name = sdf_file.split("/")[-1][:-4]
+        path_folder = f"explainer_3_hook_2811_v1/{name}"
+        print(path_folder, name)
+        os.makedirs(path_folder, exist_ok=True)
+        #/ plot dell'immagine grad 
         
-    device = torch.device("cuda:0")
-    net2 = SingleClassGCNModel_shapLike_2(feature_node_dim=12, num_classes=1)
-    net2 = net2.to(device)
-
-    dictio_torch = torch.load("/home/scontino/python/graph_vae/Addestramento_SDF_07_23/Esperimenti/models/prova_58/LossModel_17.tar")
-
-    net2.load_state_dict(dictio_torch["model_state_dict"])
-    d = d.to(device)
-    net2.eval()
-    pred, logits = net2(d.x[:, :12], d.edge_index, None, hook_start=True, hook_mid=True, hook_end=True)
-    print(pred)
-
-    pred.backward()
-    grad = net2.get_activations_gradient()
-
-    d.x = d.x[:, :12]
-    n_atoms = d.x.shape[0]
-    print(n_atoms)
-
-    name = sdf_file.split("/")[-1][:-4]
-    path_folder = f"/home/scontino/python/graph_vae/Addestramento_SDF_07_23/DrugTesting/explainer_3_hook_2811_v1/{name}"
-    print(path_folder, name)
-    os.makedirs(path_folder, exist_ok=True)
-    #/ plot dell'immagine grad 
-    
-    grad_img = MolecularGraphExplainableGradient(molecule=mol, model=net2, n_atoms=n_atoms)
-    grad_img.plotMolecule(figsize=(30, 20), fontsize="large", saveFig=True, hook_used=3, file_name=f"{path_folder}/{name}.png", rotation=0, x_reflect=False, y_reflect=True)
-    grad_img.plotCombinedMolecule(figsize=(30, 20), fontsize="xx-large", saveFig=True, hook_used=3, file_name=f"{path_folder}/{name}_merged.png", rotation=0, x_reflect=False, y_reflect=True)
+        grad_img = MolecularGraphExplainableGradient(molecule=mol, model=net2, n_atoms=n_atoms)
+        grad_img.plotMolecule(figsize=(30, 20), fontsize="large", saveFig=True, hook_used=3, file_name=f"{path_folder}/{name}.png", rotation=0, x_reflect=False, y_reflect=True)
+        grad_img.plotCombinedMolecule(figsize=(30, 20), fontsize="xx-large", saveFig=True, hook_used=3, file_name=f"{path_folder}/{name}_merged.png", rotation=0, x_reflect=False, y_reflect=True)
