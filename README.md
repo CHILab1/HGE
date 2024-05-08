@@ -21,4 +21,4 @@ Please cite our work as follows if you use the parser
 The "requirements.txt" file contains the requirements.
 
 # Run HGE
-The repository contains an HGE.py file, which allows the user to test our new explainer on a set of test data proposed or available to the user. The HGE.py file can be modified by entering the path to the sdf file that is provided or tested directly with the test sdfs that can be downloaded at the following link [cloud](https://cloud.unipa.it/index.php/s/hNPhVn3M8WIQS3k)
+The repository contains an HGE.py file, which allows the user to test our new explainer on a set of test data proposed or available to the user. The HGE.py file can be modified by entering the path to the sdf file that is provided or tested directly with the test sdfs that can be downloaded at the following link [zenodo](https://zenodo.org/records/11125467?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImY3ZDM0MjBiLWQyYjEtNGJiMi05YmY4LTE3Y2ZhNWRmMjVhMCIsImRhdGEiOnt9LCJyYW5kb20iOiJjYWQwNDdiODVjMzRmYTNkNjNhZjg5MTY3MTQxMGI5MSJ9.KzdfJ_C2_3kHrZ1tbbuz5xeRRETi_kGMMsYq2_EG2-46drEClcjlQzVHdMWIBL5pFbBjWBh4P94Em0M1qyD4dw)
