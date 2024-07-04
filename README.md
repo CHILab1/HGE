@@ -3,7 +3,7 @@
 HGE is a Hierarchical Graph Explainer is a novel graph explainer built and published as pre-print a pre-print by Paolo Sortino, Salvatore Contino, Ugo Perricone and Roberto Pirrone in the paper 'Unveiling Molecular Moieties through Hierarchical Graph Explainability' available at the following link<br>
 [ArXiv](https://doi.org/10.48550/arXiv.2402.01744)
 <br>
-Please cite our work as follows if you use the parser 
+Please cite our work as follows if you use the HGE explainer 
 ```
 @misc{sortino2024unveiling,
       title={Unveiling Molecular Moieties through Hierarchical Graph Explainability}, 
