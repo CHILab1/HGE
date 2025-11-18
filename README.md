@@ -6,9 +6,9 @@ HGE is a Hierarchical Graph Explainer is a novel graph explainer built and publi
 Please cite our work as follows if you use the HGE explainer 
 ```
 Contino, S., Sortino, P., Gulotta, M.R. et al. Unveiling molecular moieties
- through hierarchical Grad-CAM graph explainability.
- BMC Bioinformatics 26, 261 (2025).
- https://doi.org/10.1186/s12859-025-06208-y
+through hierarchical Grad-CAM graph explainability.
+BMC Bioinformatics 26, 261 (2025).
+https://doi.org/10.1186/s12859-025-06208-y
 ```
 
 # Data availability
